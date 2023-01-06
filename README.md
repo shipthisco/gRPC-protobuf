@@ -28,3 +28,5 @@ Install protocol buffer library
 
 - Javascript
 
+## Note Manually increment version
+
