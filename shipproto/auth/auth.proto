@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package UserAuth;
+message UserAuthParams {
+    string auth_token = 1;
+    string organisation = 2;
+    string user_type = 3;
+}
+
+message UserAuthResponse  {
+    bool success = 1;
+    string id = 2;
+    string organisation_id = 3;
+    string email = 4;
+    string first_name = 5;
+    string display = 6;
+
+}
+
+service UserAuth {
+    rpc GetUserFromAuthToken(UserAuthParams) returns (UserAuthResponse) {}
+}
