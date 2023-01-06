@@ -18,6 +18,7 @@ jobs:
       
       - name: Install 
         run: |
+          pip3 install grpcio-tools
           python scripts/python/generate_lib.py 
           python scripts/python/setup.py bdist_wheel
 
