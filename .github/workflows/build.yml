@@ -18,7 +18,7 @@ jobs:
       
       - name: Install 
         run: |
-          python scripts/python/genereate_lib.py
+          python scripts/python/generate_lib.py 
           python scripts/python/setup.py bdist_wheel
 
       - name: Upload
