@@ -9,12 +9,8 @@ message UserAuthParams {
 
 message UserAuthResponse  {
     bool success = 1;
-    string id = 2;
-    string organisation_id = 3;
-    string email = 4;
-    string first_name = 5;
-    string display = 6;
-
+    string data = 2;
+    string error = 3;
 }
 
 service UserAuth {

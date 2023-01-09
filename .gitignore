@@ -156,3 +156,4 @@ cython_debug/
 pyshipproto/
 dist/*
 
+.DS_Store
