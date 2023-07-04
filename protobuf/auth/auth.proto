@@ -1,4 +1,5 @@
 syntax = "proto3";
+option go_package = "go/auth"; // replace with your package location
 
 package UserAuth;
 message UserAuthParams {
