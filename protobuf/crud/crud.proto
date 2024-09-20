@@ -1,0 +1,27 @@
+syntax = "proto3";
+option go_package = "go/crud"; // replace with your package location
+
+package GenericCrud;
+
+
+message CrudCollectionResponse  {
+    bool success = 1;
+    string data = 2;
+    string error = 3;
+}
+
+
+message CrudCreateParams {
+    string collection = 1;
+    string data = 2;
+}
+
+message CrudPatchParams {
+    string collection = 1;
+    string patch_data = 2;
+}
+
+service GenericCrudService {
+    rpc CreateDocument(CrudCreateParams) returns (CrudCollectionResponse) {}
+    rpc PatchDocument(CrudPatchParams) returns (CrudCollectionResponse) {}
+}
