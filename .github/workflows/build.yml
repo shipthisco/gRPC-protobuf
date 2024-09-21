@@ -38,6 +38,7 @@ jobs:
           files: dist/*.whl
           name: V${{env.VERSION}}
           tag_name: V${{env.VERSION}}
+          token: ${{ secrets.GITHUB_TOKEN }}
         
 
 
