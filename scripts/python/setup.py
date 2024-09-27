@@ -2,10 +2,11 @@ from setuptools import setup, find_packages
 import os
 print(find_packages())
 
-version = os.environ['PROTO_BUF_LIB_VERSION']
+version = "V1.1.2"
 if version:
     setup(
         name = 'pyshipproto', 
         version=version, 
-        packages=find_packages()
+        packages=find_packages(),
+        url="https://github.com/shipthisco/gRPC-protobuf"
     )
