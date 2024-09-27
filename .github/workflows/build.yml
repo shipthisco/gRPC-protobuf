@@ -8,7 +8,7 @@ jobs:
   BuildPython:
     runs-on: ubuntu-latest
     env:
-      VERSION: 1.1.0
+      VERSION: 1.1.1
     steps:
       - name: Checkout
         uses: actions/checkout@v3
