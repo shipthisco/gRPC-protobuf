@@ -10,7 +10,7 @@ jobs:
     env:
       VERSION: 1.1.1
       # Get the last two files in the dist directory
-      LAST_TWO_FILES: $(ls -t scripts/python/dist/* | head -n 2)
+      LAST_TWO_FILES: $(ls -t dist/* | head -n 2)
     steps:
       - name: Checkout
         uses: actions/checkout@v3
