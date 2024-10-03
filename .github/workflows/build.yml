@@ -36,7 +36,7 @@ jobs:
           twine check ${{env.LAST_TWO_FILES}}
 
           # Upload the last two files
-          twine upload $LAST_TWO_FILES --username __token__ --password ${{ secrets.PYPI_API_KEY }}
+          twine upload ${{env.LAST_TWO_FILES}} --username __token__ --password ${{ secrets.PYPI_API_KEY }}
 
       - name: Release (Optional)
         run: echo "Release to PyPI is handled automatically with twine upload."
