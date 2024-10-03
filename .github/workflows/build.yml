@@ -2,14 +2,20 @@ on:
   push:
     branches:
       - bugfix/grpc-generate-lib
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version of the package"
+        required: true
+        default: "1.1.5"
+
 name: Build
 
 jobs:
   BuildPython:
     runs-on: ubuntu-latest
     env:
-      VERSION: 1.1.5
-      # Get the last two files in the dist directory
+      VERSION: ${{ github.event.inputs.version }} # Use the input version
       LAST_TWO_FILES: $(ls -t dist/* | head -n 2)
     steps:
       - name: Checkout
@@ -33,10 +39,10 @@ jobs:
           pip install twine
 
           # Check the last two files
-          twine check ${{env.LAST_TWO_FILES}}
+          twine check ${{ env.LAST_TWO_FILES }}
 
           # Upload the last two files
-          twine upload ${{env.LAST_TWO_FILES}} --username __token__ --password ${{ secrets.PYPI_API_KEY }}
+          twine upload ${{ env.LAST_TWO_FILES }} --username __token__ --password ${{ secrets.PYPI_API_KEY }}
 
       - name: Release (Optional)
-        run: echo "Release to PyPI is handled automatically with twine upload."
+        run: echo "🚀 Release to PyPI is handled automatically with twine upload."
