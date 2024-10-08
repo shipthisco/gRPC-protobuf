@@ -39,6 +39,9 @@ jobs:
         run: |
           pip install twine
 
+          # Navigate to the dist folder location
+          cd scripts/python
+
           # Check the last two files
           twine check ${{ env.LAST_TWO_FILES }}
 
