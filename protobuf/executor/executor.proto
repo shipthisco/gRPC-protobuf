@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package executor;
+
+// The request message containing the JavaScript code and other parameters.
+message ExecutorRequest {
+    string data = 1;
+    string location = 2;
+    string region = 3;
+    string organisation = 4;
+    string code = 5;
+}
+
+// The response message containing the execution result.
+message ExecutorResponse {
+    string result = 1;
+}
+
+// The code execution service.
+service ExecutorService {
+    rpc ExecuteCode (ExecutorRequest) returns (ExecutorResponse);
+}
