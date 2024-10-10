@@ -1,14 +1,22 @@
 on:
   push:
     branches:
-      - develop
+      - bugfix/grpc-generate-lib
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version of the package"
+        required: true
+        default: "1.1.8"
+
 name: Build
 
 jobs:
   BuildPython:
     runs-on: ubuntu-latest
     env:
-      VERSION: 1.1.1
+      VERSION: ${{ github.event.inputs.version }} # Use the input version
+      LAST_TWO_FILES: $(ls -t dist/* | head -n 2)
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -16,29 +24,29 @@ jobs:
       - name: Set up Python 3.10
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10-dev' 
-      
-      - name: Install 
+          python-version: "3.10-dev"
+
+      - name: Install Dependencies
         run: |
-          pip3 install grpcio-tools
-          pip3 install wheel
-          PROTO_BUF_LIB_VERSION=${{env.VERSION}} python scripts/python/generate_lib.py 
-          PROTO_BUF_LIB_VERSION=${{env.VERSION}} python scripts/python/setup.py bdist_wheel
+          pip install grpcio-tools setuptools wheel
 
+      - name: Generate Library
+        run: |
+          cd scripts/python
+          python generate_lib.py ${{ env.VERSION }}
 
-      - name: Upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: python
-          path: dist/*.whl
+      - name: Check and Upload to PyPI
+        run: |
+          pip install twine
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: dist/*.whl
-          name: V${{env.VERSION}}
-          tag_name: V${{env.VERSION}}
-          token: ${{ secrets.GRPC_RELEASE_TOKEN }}
-        
+          # Navigate to the dist folder location
+          cd scripts/python
 
+          # Check the last two files
+          twine check ${{ env.LAST_TWO_FILES }}
 
+          # Upload the last two files
+          twine upload ${{ env.LAST_TWO_FILES }} --username __token__ --password ${{ secrets.PYPI_API_KEY }}
+
+      - name: Release (Optional)
+        run: echo "🚀 Release to PyPI is handled automatically with twine upload."
