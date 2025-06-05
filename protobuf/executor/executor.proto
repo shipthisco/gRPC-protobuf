@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package executor;
 
-// The request message containing the JavaScript code and other parameters.
+// Common request structure for both JS and Python
 message ExecutorRequest {
     string data = 1;
     string location = 2;
@@ -11,12 +11,13 @@ message ExecutorRequest {
     string code = 5;
 }
 
-// The response message containing the execution result.
+// Response message containing the execution result
 message ExecutorResponse {
     string result = 1;
 }
 
-// The code execution service.
+// Code execution service with language-specific RPCs
 service ExecutorService {
-    rpc ExecuteCode (ExecutorRequest) returns (ExecutorResponse);
+    rpc xrunJavascript (ExecutorRequest) returns (ExecutorResponse);
+    rpc xrunPython (ExecutorRequest) returns (ExecutorResponse);
 }
