@@ -50,3 +50,30 @@ jobs:
 
       - name: Release (Optional)
         run: echo "🚀 Release to PyPI is handled automatically with twine upload."
+
+  BuildJavaScript:
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ github.event.inputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Generate Library
+        run: |
+          cd scripts/javascript
+          node generate_lib.js ${{ env.VERSION }}
+
+      - name: Publish to npm
+        run: npm publish scripts/javascript/jsshipproto-${{ env.VERSION }}.tgz --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Release (Optional)
+        run: echo "📦 JavaScript package published"
