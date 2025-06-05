@@ -10,6 +10,9 @@ on:
         default: "1.1.8"
 
 name: Build
+permissions:
+  contents: read
+  packages: write
 
 jobs:
   BuildPython:
