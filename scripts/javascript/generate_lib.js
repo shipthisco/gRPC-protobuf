@@ -19,7 +19,8 @@ function findProtoc() {
     execSync('command -v grpc_tools_node_protoc', { stdio: 'ignore' });
     return 'grpc_tools_node_protoc';
   } catch (_) {
-    return 'npx grpc_tools_node_protoc';
+    // Explicitly install grpc-tools via npx so the correct binary is used
+    return 'npx -p grpc-tools grpc_tools_node_protoc';
   }
 }
 
