@@ -1,40 +1,50 @@
+# 🚢 Shipthis gRPC Protobufs
 
-# Shipthis Internal - gRPC-Protobuffers 
+Welcome to the collection of protobuf definitions used across Shipthis services. These files generate language specific libraries for seamless communication between microservices.
 
-Protocol buffer for interal communication of shipthis microservices.
+## 📂 Repository layout
 
-## Installation
+- **protobuf/** – Source `.proto` files defining gRPC services
+- **go/** – Generated Go bindings
+- **scripts/** – Helpers to build Python and JavaScript packages
 
-Install protocol buffer library
+## 📦 Installation
 
-#### Javascript
+### JavaScript
 ```bash
 npm install jsshipproto
 ```
 
-#### Python
-
+### Python
 ```bash
 pip install git+https://github.com/shipthisco/gRPC-protobuf.git
 ```
 
-To build the JavaScript package locally, the script `scripts/javascript/generate_lib.js`
-relies on `grpc_tools_node_protoc`. Install it globally or use `npx` when running
-the script:
+## 🛠️ Building from source
+
+To generate the JavaScript package locally, ensure `grpc_tools_node_protoc` is available globally or run via `npx`:
 
 ```bash
-npm install -g grpc-tools  # optional
+npm install -g grpc-tools # optional
+node scripts/javascript/generate_lib.js <version>
 ```
-    
 
-  
-## Supported Backends
+For Python packages run:
 
-- Python
+```bash
+python scripts/python/generate_lib.py <version>
+```
 
-- Rust
+## ✨ Supported services
 
-- Javascript
+- Authentication
+- Generic CRUD operations
+- Code execution
 
-## Note Manually increment version
+## 🤝 Contributing
 
+We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).
