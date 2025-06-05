@@ -9,7 +9,7 @@ Install protocol buffer library
 
 #### Javascript
 ```bash
-npm install git+https://github.com/shipthisco/gRPC-protobuf.git
+npm install jsshipproto
 ```
 
 #### Python
