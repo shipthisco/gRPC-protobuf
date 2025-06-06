@@ -46,7 +46,8 @@ protoFiles.forEach(proto => {
   const command = [
     PROTOC_CMD,
     `--js_out=import_style=commonjs,binary:${distPath}`,
-    `--grpc_out=${distPath}`,
+    // Generate code compatible with @grpc/grpc-js instead of the deprecated grpc package
+    `--grpc_out=grpc_js:${distPath}`,
     `-I${packageFolder}`,
     proto
   ].join(' ');
@@ -67,6 +68,10 @@ const packageJson = {
   keywords: ['javascript', 'gRPC', 'protobuf', 'jsshipproto'],
   author: 'JsShipProto',
   license: 'ISC',
+  // Use the modern @grpc/grpc-js runtime instead of the deprecated grpc package
+  dependencies: {
+    '@grpc/grpc-js': '^1.8.0'
+  }
 };
 fs.writeFileSync(
   path.join(distPath, 'package.json'),

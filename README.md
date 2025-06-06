@@ -28,6 +28,7 @@ To generate the JavaScript package locally, ensure `grpc_tools_node_protoc` is a
 npm install -g grpc-tools # optional
 node scripts/javascript/generate_lib.js <version>
 # The script will use `npx -p grpc-tools` automatically if the tool isn't installed.
+# Generated stubs rely on `@grpc/grpc-js` as the runtime implementation.
 ```
 
 For Python packages run:
