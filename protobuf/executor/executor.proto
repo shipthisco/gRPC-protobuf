@@ -6,7 +6,7 @@ package executor;
 message ExecutorRequest {
     string opData = 1;
     string g = 2; // global context about organisation, user, region, location
-    string additional_params = 3 // will have document definition if required, and view 
+    string additional_params = 3; // will have document definition if required, and view 
     string code = 4;
 }
 
