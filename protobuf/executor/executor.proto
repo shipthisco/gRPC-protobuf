@@ -8,6 +8,7 @@ message ExecutorRequest {
     string g = 2; // global context about organisation, user, region, location
     string additional_params = 3; // will have document definition if required, and view 
     string code = 4;
+    bool is_sdk_required=5;
 }
 
 // Response message containing the execution result
