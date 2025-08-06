@@ -3,7 +3,7 @@ import sys
 from fnmatch import fnmatch
 
 # Set a default version
-DEFAULT_VERSION = '1.1.8'
+DEFAULT_VERSION = '2.4.1'
 
 # Get the version from command-line arguments or use the default
 if len(sys.argv) < 2:
