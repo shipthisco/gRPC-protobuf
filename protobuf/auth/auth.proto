@@ -7,6 +7,11 @@ message UserAuthParams {
     string organisation = 2;
     string user_type = 3;
 }
+message UserApiKeyParams {
+    string api_key = 1;
+    string organisation = 2;
+    string user_type = 3;
+}
 
 message UserAuthResponse  {
     bool success = 1;
@@ -16,4 +21,5 @@ message UserAuthResponse  {
 
 service UserAuth {
     rpc GetUserFromAuthToken(UserAuthParams) returns (UserAuthResponse) {}
+    rpc GetUserFromApiKey(UserApiKeyParams) returns (UserAuthResponse) {}
 }
