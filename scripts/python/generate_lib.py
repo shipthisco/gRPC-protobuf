@@ -97,7 +97,7 @@ setup(
     install_requires=[
         'grpcio>=1.48.0',
         'grpcio-tools>=1.48.0',
-        'protobuf>=3.20.0,<5.0.0',
+        'protobuf>=4.25.0',
     ],
     python_requires='>=3.8',
     keywords=['python', 'gRPC', 'protobuf', 'pyshipproto'],
