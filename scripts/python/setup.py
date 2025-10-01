@@ -1,7 +1,7 @@
 
 from setuptools import setup, find_packages
 
-VERSION = '1.1.7' 
+VERSION = '2.4.2' 
 DESCRIPTION = 'PyShipProto Package'
 LONG_DESCRIPTION = 'Pyshipproto package with generated gRPC services.'
 
@@ -16,14 +16,22 @@ setup(
     long_description_content_type="text/markdown",
     packages=find_packages(),
     url="https://github.com/shipthisco/gRPC-protobuf",
-    install_requires=[],
+    install_requires=[
+        'grpcio>=1.48.0',
+        'grpcio-tools>=1.48.0',
+        'protobuf>=3.20.0,<5.0.0',
+    ],
+    python_requires='>=3.8',
     keywords=['python', 'gRPC', 'protobuf', 'pyshipproto'],
     classifiers=[
         "Development Status :: 3 - Alpha",
-        "Intended Audience :: Education",
-        "Programming Language :: Python :: 2",
+        "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
-        "Operating System :: MacOS :: MacOS X",
-        "Operating System :: Microsoft :: Windows",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Operating System :: OS Independent",
     ]
 )
