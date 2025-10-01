@@ -97,7 +97,7 @@ setup(
     install_requires=[
         'grpcio>=1.48.0',
         'grpcio-tools>=1.48.0',
-        'protobuf>=4.21.0,<6.0.0',  # Support older and newer protobuf versions
+        'protobuf>=4.21.0,<7.0.0',  # Support protobuf 4.x, 5.x, and 6.x versions
     ],
     python_requires='>=3.8',
     keywords=['python', 'gRPC', 'protobuf', 'pyshipproto'],
