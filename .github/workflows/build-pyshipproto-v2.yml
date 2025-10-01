@@ -59,13 +59,9 @@ jobs:
             echo "Checking files: $WHEEL_FILE $TAR_FILE"
             twine check "$WHEEL_FILE" "$TAR_FILE"
 
-            # Only upload if we have a PyPI token
-            if [ -n "${{ secrets.PYPI_API_TOKEN }}" ]; then
-              echo "Uploading to PyPI..."
-              twine upload "$WHEEL_FILE" "$TAR_FILE" --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}
-            else
-              echo "No PyPI token available, skipping upload"
-            fi
+            # Upload to PyPI
+            echo "Uploading to PyPI..."
+            twine upload "$WHEEL_FILE" "$TAR_FILE" --username __token__ --password ${{ secrets.PYPI_API_KEY }}
           else
             echo "Distribution files not found!"
             exit 1
