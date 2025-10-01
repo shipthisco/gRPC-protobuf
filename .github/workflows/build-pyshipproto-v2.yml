@@ -1,0 +1,75 @@
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version of the package"
+        required: true
+        default: "2.6.3"
+
+name: Build PyShipProto V2
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  BuildPython:
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ github.event.inputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install Dependencies
+        run: |
+          pip install grpcio-tools setuptools wheel
+
+      - name: Generate Library
+        run: |
+          cd scripts/python
+          python generate_lib.py ${{ env.VERSION }}
+
+      - name: Install twine
+        run: pip install twine
+
+      - name: Check and Upload to PyPI
+        run: |
+          # Navigate to the dist folder location
+          cd scripts/python
+
+          # List generated files
+          echo "Generated files:"
+          ls -la dist/
+
+          # Get the wheel and tar.gz files for the version
+          WHEEL_FILE="dist/pyshipproto-${{ env.VERSION }}-py3-none-any.whl"
+          TAR_FILE="dist/pyshipproto-${{ env.VERSION }}.tar.gz"
+
+          # Check if files exist
+          if [ -f "$WHEEL_FILE" ] && [ -f "$TAR_FILE" ]; then
+            echo "Checking files: $WHEEL_FILE $TAR_FILE"
+            twine check "$WHEEL_FILE" "$TAR_FILE"
+
+            # Only upload if we have a PyPI token
+            if [ -n "${{ secrets.PYPI_API_TOKEN }}" ]; then
+              echo "Uploading to PyPI..."
+              twine upload "$WHEEL_FILE" "$TAR_FILE" --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}
+            else
+              echo "No PyPI token available, skipping upload"
+            fi
+          else
+            echo "Distribution files not found!"
+            exit 1
+          fi
+
+      - name: Release Complete
+        run: echo "🚀 Release to PyPI is complete!"
