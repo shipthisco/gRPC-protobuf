@@ -8,7 +8,7 @@ on:
       version:
         description: "Version of the package"
         required: true
-        default: "2.7.0"
+        default: "2.8.0"
 
 name: Build PyShipProto V2
 permissions:
@@ -31,7 +31,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install grpcio-tools setuptools wheel
+          pip install grpcio-tools==1.75.1 setuptools wheel
 
       - name: Generate Library
         run: |
